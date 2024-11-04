@@ -1,6 +1,9 @@
 /* beast story v.0 */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 
 struct Character
 {
@@ -30,8 +33,23 @@ char race_list[8][20] = {
 		};
 
 
+char battle_class_list[9][20] = {
+		"warrior",		// 1
+		"knight",		// 2
+		"paladin",		// 3
+		"rouge",		// 4
+		"assassin",		// 5
+		"archer",		// 6
+		"wizard",		// 7
+		"sorcerer",		// 8
+		"necromancer"		// 9
+		};
+
+
 int main()
 {
+	system("clear");
+
 	// name selection
 	printf("What is your name:\t");
 	scanf("%s", &player_name);
@@ -43,7 +61,7 @@ int main()
 	printf("I may have your name, but who you really are will be seen in times ahead.\n");
 
 	//age selection
-	printf("Select your age:\t");
+	printf("\nSelect your age:\t");
 	scanf("%d", &player_age);
 
 	//race selection
@@ -51,19 +69,42 @@ int main()
 
 	printf("\n\nPlease select a race (1 - %d):\n", race_list_size);
 
-	//race list printf loop
+	//race list printf for loop
 	for(int i = 0; i < race_list_size; i++)
 	{
 		int readable_index = i + 1;
 		printf("%d. %s\n", readable_index, race_list[i]);
 	};//end for loop
 
+	// new Line for readability
+	printf("\n");
+
 	int race_choice;
-	scanf("\n%d", &race_choice);
-	race_choice = race_choice - 1;
-	//player_race = race _list[race_choice];
+	scanf("%d", &race_choice);
+	--race_choice;
+	strcpy(player_race, race_list[race_choice]);
 
 	// class selection
-	printf("\n\nNow select your class:\n");
+	int battle_class_list_size = sizeof(battle_class_list) / sizeof(battle_class_list[0]);
 
-}
+	printf("\n\nNow select your class (1 - %d):\n", battle_class_list_size);
+
+	//battle class list printf for loop
+	for(int i = 0; i < battle_class_list_size; i++)
+	{
+		int readable_index = i + 1;
+		printf("%d. %s\n", readable_index, battle_class_list[i]);
+	}; //end for loop
+
+	// new line for readability
+	printf("\n");
+
+	int battle_class_choice;
+	scanf("%d", &battle_class_choice);
+	--battle_class_choice;
+	strcpy(player_battle_class, battle_class_list[battle_class_choice]);
+
+	printf("%s\n", player_battle_class);
+
+}// end of main
+
