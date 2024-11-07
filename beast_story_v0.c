@@ -7,10 +7,10 @@
 
 struct Character
 {
-	char name[50];
+	char *name[50];
 	int age;
-	char race[50];
-	char battle_class[50];
+	char *race[50];
+	char *battle_class[50];
 };
 
 
@@ -60,9 +60,13 @@ int main()
 	printf("Freedom comes at a cost and you will be given a choice.\n");
 	printf("I may have your name, but who you really are will be seen in times ahead.\n");
 
+
+
 	//age selection
 	printf("\nSelect your age:\t");
 	scanf("%d", &player_age);
+
+
 
 	//race selection
 	int race_list_size = sizeof(race_list) / sizeof(race_list[0]);
@@ -83,6 +87,8 @@ int main()
 	scanf("%d", &race_choice);
 	--race_choice;
 	strcpy(player_race, race_list[race_choice]);
+
+
 
 	// class selection
 	int battle_class_list_size = sizeof(battle_class_list) / sizeof(battle_class_list[0]);
@@ -105,6 +111,15 @@ int main()
 	strcpy(player_battle_class, battle_class_list[battle_class_choice]);
 
 	printf("%s\n", player_battle_class);
+
+
+
+	// declare player character
+	struct Character player_character = {.name = player_name, .age = player_age, .race = player_race, .battle_class = player_battle_class};
+
+	printf("Confirm character data:\n");
+	printf("name:\t%s", player_character.name);
+	printf("age:\t%d", player_character.age);
 
 }// end of main
 
