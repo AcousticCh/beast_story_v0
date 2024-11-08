@@ -7,10 +7,10 @@
 
 struct Character
 {
-	char *name[50];
+	char name[50];
 	int age;
-	char *race[50];
-	char *battle_class[50];
+	char race[50];
+	char battle_class[50];
 };
 
 
@@ -44,6 +44,16 @@ char battle_class_list[9][20] = {
 		"sorcerer",		// 8
 		"necromancer"		// 9
 		};
+
+
+
+void updateCharacterInfo(struct Character *pChar, char name[50], int age, char race[50], char battle_class[50])
+{
+	strcpy(pChar->name, name);
+	pChar->age = age;
+        strcpy(pChar->race, race);
+        strcpy(pChar->battle_class, battle_class);
+};
 
 
 int main()
@@ -110,16 +120,18 @@ int main()
 	--battle_class_choice;
 	strcpy(player_battle_class, battle_class_list[battle_class_choice]);
 
-	printf("%s\n", player_battle_class);
-
 
 
 	// declare player character
-	struct Character player_character = {.name = player_name, .age = player_age, .race = player_race, .battle_class = player_battle_class};
+	struct Character playerCharacter;
+
+	updateCharacterInfo(&playerCharacter, player_name, player_age, player_race, player_battle_class);
 
 	printf("Confirm character data:\n");
-	printf("name:\t%s", player_character.name);
-	printf("age:\t%d", player_character.age);
+	printf("name:\t%s\n", playerCharacter.name);
+	printf("age:\t%d\n", playerCharacter.age);
+	printf("race:\t%s\n", playerCharacter.race);
+	printf("class:\t%s\n", playerCharacter.battle_class);
 
 }// end of main
 
