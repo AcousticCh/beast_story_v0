@@ -122,16 +122,68 @@ int main()
 
 
 
+	// new line for readability
+        printf("\n");
+
 	// declare player character
 	struct Character playerCharacter;
 
 	updateCharacterInfo(&playerCharacter, player_name, player_age, player_race, player_battle_class);
 
 	printf("Confirm character data:\n");
-	printf("name:\t%s\n", playerCharacter.name);
-	printf("age:\t%d\n", playerCharacter.age);
-	printf("race:\t%s\n", playerCharacter.race);
-	printf("class:\t%s\n", playerCharacter.battle_class);
+	printf("1. name:\t%s\n", playerCharacter.name);
+	printf("2. age:\t\t%d\n", playerCharacter.age);
+	printf("3. race:\t%s\n", playerCharacter.race);
+	printf("4. class:\t%s\n", playerCharacter.battle_class);
+
+	int edit_data_input;
+	printf("\nSelect 1-4 to edit character info.\nSelect 0 to start game.\n\n");
+	scanf("%d", &edit_data_input);
+
+	// new line for readability
+        printf("\n");
+
+	switch(edit_data_input)
+	{
+		case 0:
+			//start game
+			printf("start game\n");
+			break;
+
+		case 1:
+			//edit name
+			printf("choose new name\n");
+			scanf("%s", &player_name);
+			break;
+
+		case 2:
+			//edit age
+			printf("choose new age\n");
+                        scanf("%d", &player_age);
+			break;
+
+		case 3:
+			//edit race
+			printf("choose new race\n");
+                        scanf("%s", &player_race);
+			break;
+
+		case 4:
+			//edit battle class
+			printf("choose new class\n");
+                        scanf("%s", &player_battle_class);
+			break;
+	}; // end of switch
+
+	// CREATE LOOPING UNTIL START GAME IS SELECTED
+
+	updateCharacterInfo(&playerCharacter, player_name, player_age, player_race, player_battle_class);
+
+        printf("Confirm character data:\n");
+        printf("1. name:\t%s\n", playerCharacter.name);
+        printf("2. age:\t\t%d\n", playerCharacter.age);
+        printf("3. race:\t%s\n", playerCharacter.race);
+        printf("4. class:\t%s\n", playerCharacter.battle_class);
 
 }// end of main
 
