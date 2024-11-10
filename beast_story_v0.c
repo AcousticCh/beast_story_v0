@@ -4,6 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+// CREATE CONTIDIONAL CHOOSING STORY BASED ON RACE
+// START STORIES
+
+
+
 
 struct Character
 {
@@ -47,6 +52,75 @@ char battle_class_list[9][20] = {
 
 
 
+
+void getPlayerName()
+{
+	printf("What is your name:\t");
+        scanf("%s", &player_name);
+
+	system("clear");
+};
+
+
+void getPlayerAge()
+{
+	printf("\nSelect your age:\t");
+        scanf("%d", &player_age);
+
+	system("clear");
+};
+
+
+void getPlayerRace()
+{
+	int race_list_size = sizeof(race_list) / sizeof(race_list[0]);
+
+        printf("\n\nPlease select a race (1 - %d):\n", race_list_size);
+
+        //race list printf for loop
+        for(int i = 0; i < race_list_size; i++)
+        {
+                int readable_index = i + 1;
+                printf("%d. %s\n", readable_index, race_list[i]);
+        };//end for loop
+
+        // new Line for readability
+        printf("\n");
+
+        int race_choice;
+        scanf("%d", &race_choice);
+        --race_choice;
+        strcpy(player_race, race_list[race_choice]);
+
+	system("clear");
+};
+
+
+void getPlayerBattleClass()
+{
+	int battle_class_list_size = sizeof(battle_class_list) / sizeof(battle_class_list[0]);
+
+        printf("\n\nNow select your class (1 - %d):\n", battle_class_list_size);
+
+        //battle class list printf for loop
+        for(int i = 0; i < battle_class_list_size; i++)
+        {
+                int readable_index = i + 1;
+                printf("%d. %s\n", readable_index, battle_class_list[i]);
+        }; //end for loop
+
+        // new line for readability
+        printf("\n");
+
+        int battle_class_choice;
+        scanf("%d", &battle_class_choice);
+        --battle_class_choice;
+        strcpy(player_battle_class, battle_class_list[battle_class_choice]);
+
+	system("clear");
+};
+
+
 void updateCharacterInfo(struct Character *pChar, char name[50], int age, char race[50], char battle_class[50])
 {
 	strcpy(pChar->name, name);
@@ -61,8 +135,8 @@ int main()
 	system("clear");
 
 	// name selection
-	printf("What is your name:\t");
-	scanf("%s", &player_name);
+	getPlayerName();
+
 
 	// introduction
 	printf("\n\nWelcome %s you are entering a new world \nwhere fantasy becomes reality and uncertainty is all around.\n", player_name);
@@ -73,53 +147,16 @@ int main()
 
 
 	//age selection
-	printf("\nSelect your age:\t");
-	scanf("%d", &player_age);
+	getPlayerAge();
 
 
 
 	//race selection
-	int race_list_size = sizeof(race_list) / sizeof(race_list[0]);
-
-	printf("\n\nPlease select a race (1 - %d):\n", race_list_size);
-
-	//race list printf for loop
-	for(int i = 0; i < race_list_size; i++)
-	{
-		int readable_index = i + 1;
-		printf("%d. %s\n", readable_index, race_list[i]);
-	};//end for loop
-
-	// new Line for readability
-	printf("\n");
-
-	int race_choice;
-	scanf("%d", &race_choice);
-	--race_choice;
-	strcpy(player_race, race_list[race_choice]);
-
+	getPlayerRace();
 
 
 	// class selection
-	int battle_class_list_size = sizeof(battle_class_list) / sizeof(battle_class_list[0]);
-
-	printf("\n\nNow select your class (1 - %d):\n", battle_class_list_size);
-
-	//battle class list printf for loop
-	for(int i = 0; i < battle_class_list_size; i++)
-	{
-		int readable_index = i + 1;
-		printf("%d. %s\n", readable_index, battle_class_list[i]);
-	}; //end for loop
-
-	// new line for readability
-	printf("\n");
-
-	int battle_class_choice;
-	scanf("%d", &battle_class_choice);
-	--battle_class_choice;
-	strcpy(player_battle_class, battle_class_list[battle_class_choice]);
-
+	getPlayerBattleClass();
 
 
 	// new line for readability
@@ -130,60 +167,55 @@ int main()
 
 	updateCharacterInfo(&playerCharacter, player_name, player_age, player_race, player_battle_class);
 
-	printf("Confirm character data:\n");
-	printf("1. name:\t%s\n", playerCharacter.name);
-	printf("2. age:\t\t%d\n", playerCharacter.age);
-	printf("3. race:\t%s\n", playerCharacter.race);
-	printf("4. class:\t%s\n", playerCharacter.battle_class);
-
-	int edit_data_input;
-	printf("\nSelect 1-4 to edit character info.\nSelect 0 to start game.\n\n");
-	scanf("%d", &edit_data_input);
-
-	// new line for readability
-        printf("\n");
-
-	switch(edit_data_input)
+	int continue_editing = 1;
+	while(continue_editing)
 	{
-		case 0:
-			//start game
-			printf("start game\n");
-			break;
+		printf("Confirm character data:\n");
+		printf("1. name:\t%s\n", playerCharacter.name);
+		printf("2. age:\t\t%d\n", playerCharacter.age);
+		printf("3. race:\t%s\n", playerCharacter.race);
+		printf("4. class:\t%s\n", playerCharacter.battle_class);
 
-		case 1:
-			//edit name
-			printf("choose new name\n");
-			scanf("%s", &player_name);
-			break;
+		int edit_data_input;
+		printf("\nSelect 1-4 to edit character info.\nSelect 0 to start game.\n\n");
+		scanf("%d", &edit_data_input);
 
-		case 2:
-			//edit age
-			printf("choose new age\n");
-                        scanf("%d", &player_age);
-			break;
+		// new line for readability
+        	printf("\n");
 
-		case 3:
-			//edit race
-			printf("choose new race\n");
-                        scanf("%s", &player_race);
-			break;
+		switch(edit_data_input)
+		{
+			case 0:
+				//start game
+				continue_editing = 0;
+				break;
 
-		case 4:
-			//edit battle class
-			printf("choose new class\n");
-                        scanf("%s", &player_battle_class);
-			break;
-	}; // end of switch
+			case 1:
+				//edit name
+				getPlayerName();
+				break;
 
-	// CREATE LOOPING UNTIL START GAME IS SELECTED
+			case 2:
+				//edit age
+				getPlayerAge();
+				break;
 
-	updateCharacterInfo(&playerCharacter, player_name, player_age, player_race, player_battle_class);
+			case 3:
+				//edit race
+				getPlayerRace();
+				break;
 
-        printf("Confirm character data:\n");
-        printf("1. name:\t%s\n", playerCharacter.name);
-        printf("2. age:\t\t%d\n", playerCharacter.age);
-        printf("3. race:\t%s\n", playerCharacter.race);
-        printf("4. class:\t%s\n", playerCharacter.battle_class);
+			case 4:
+				//edit battle class
+				getPlayerBattleClass();
+				break;
+		}; // end of switch
+
+		updateCharacterInfo(&playerCharacter, player_name, player_age, player_race, player_battle_class);
+
+	}; // end of while loop for editing
+
+	printf("Current end");
 
 }// end of main
 
