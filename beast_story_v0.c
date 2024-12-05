@@ -10,19 +10,21 @@
 
 
 
-struct Character
+typedef struct
 {
 	char name[50];
 	int age;
 	char race[50];
 	char battle_class[50];
-};
+} Character;
 
 
 char player_name[50];
 int player_age;
 char player_race[50];
 char player_battle_class[50];
+
+int race_choice_int;
 
 
 // if new characters are added index size must change accordingly
@@ -71,7 +73,7 @@ void getPlayerAge()
 };
 
 
-void getPlayerRace()
+int getPlayerRace()
 {
 	int race_list_size = sizeof(race_list) / sizeof(race_list[0]);
 
@@ -93,6 +95,8 @@ void getPlayerRace()
         strcpy(player_race, race_list[race_choice]);
 
 	system("clear");
+
+	return race_choice;
 };
 
 
@@ -121,7 +125,7 @@ void getPlayerBattleClass()
 };
 
 
-void updateCharacterInfo(struct Character *pChar, char name[50], int age, char race[50], char battle_class[50])
+void updateCharacterInfo(Character *pChar, char name[50], int age, char race[50], char battle_class[50])
 {
 	strcpy(pChar->name, name);
 	pChar->age = age;
@@ -152,7 +156,7 @@ int main()
 
 
 	//race selection
-	getPlayerRace();
+	race_choice_int = getPlayerRace();
 
 
 	// class selection
@@ -163,7 +167,7 @@ int main()
         printf("\n");
 
 	// declare player character
-	struct Character playerCharacter;
+	Character playerCharacter;
 
 	updateCharacterInfo(&playerCharacter, player_name, player_age, player_race, player_battle_class);
 
@@ -202,7 +206,7 @@ int main()
 
 			case 3:
 				//edit race
-				getPlayerRace();
+				race_choice_int = getPlayerRace();
 				break;
 
 			case 4:
@@ -214,6 +218,45 @@ int main()
 		updateCharacterInfo(&playerCharacter, player_name, player_age, player_race, player_battle_class);
 
 	}; // end of while loop for editing
+
+	//------------------------ intro to story -----------------------------------|
+	switch(race_choice_int) {
+
+		case 0:
+			// function for race story here
+			printf("Human");
+			break;
+		case 1:
+                        // function for race story here
+			printf("Mermaid");
+                        break;
+		case 2:
+                        // function for race story here
+			printf("Dragonoid");
+                        break;
+		case 3:
+                        // function for race story here
+			printf("Elf");
+                        break;
+		case 4:
+                        // function for race story here
+			printf("Nature Spirit");
+                        break;
+		case 5:
+                        // function for race story here
+			printf("Dwarf");
+                        break;
+		case 6:
+                        // function for race story here
+			printf("Werewolf");
+                        break;
+		case 7:
+                        // function for race story here
+			printf("Vampire");
+                        break;
+
+	}; // end of switch
+
 
 	printf("Current end");
 
